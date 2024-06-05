@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Conway's Game of Life Demonstration</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1>Conway's Game of Life Demonstration</h1>
+
+    <h2>项目介绍请点击 <a href="introduction.html">项目介绍</a> 查看</h2>
+
+    <div class="demo" id="demo-area">
+        <div class="config" id="config-block">
+            <div class="config-header">
+                <h3>参数配置</h3>
+                <p>(框内灰色数值为默认值)</p>
+            </div>
+            <!-- 配置内容
+                    1. 画布大小：默认为 `50` 
+                    2. 存活/死亡规则：
+                        - 存活状态下：周围有 `2~3` 个活细胞则存活，否则死亡
+                        - 死亡状态下：周围有 `3` 个活细胞则存活，否则死亡
+                    3. 循环周期：每 `1000` 毫秒计算并显示下一个画面
+                -->
+            <div class="config-info">
+                <p class="config-text"><label for="canvasSize">
+                        画布大小：以
+                        <input type="number" onchange="onChangeConfig('canvasSize');" id="input-canvasSize"
+                            placeholder="50">
+                        为边长的正方形（需配合“重置画布”按钮使用）
+                </label></p>
+                <p class="config-text">
+                    存活/死亡规则：
+                <ul>
+                    <li><label for="living">
+                            对存活细胞：周围有最少
+                            <input type="number" onchange="onChangeConfig('livingMin');" id="input-livingMin"
+                                placeholder="2" min="1" max="8">
+                            个、最多
+                            <input type="number" onchange="onChangeConfig('livingMax');" id="input-livingMax"
+                                placeholder="3" min="1" max="8">
+                            个活细胞则下一步中存活，否则死亡（两个值可以相等）
+                    </label></li>
+                    <li><label for="dead">
+                            对死亡细胞：周围有最少
+                            <input type="number" onchange="onChangeConfig('deadMin');" id="input-deadMin"
+                                placeholder="3" min="1" max="8">
+                            个、最多
+                            <input type="number" onchange="onChangeConfig('deadMax');" id="input-deadMax"
+                                placeholder="3" min="1" max="8">
+                            个活细胞则下一步中存活，否则死亡（两个值可以相等）
+                    </label></li>
+                </ul>
+                </p>
+                <p class="config-text"><label for="cycleTime">
+                        循环周期：每
+                        <input type="number" onchange="onChangeConfig('cycleTime');" id="input-cycleTime"
+                            placeholder="500">
+                        毫秒计算并显示下一个画面
+                    </label></p>
+            </div>
+        </div>
+
+        <div class="init" id="init-block">
+            <p class="init-text">初始状态：可以直接点击细胞设置，黑色为存活，白色为死亡。或者也可以使用以下模板进行演示（使用模板会清空画布并改成预设画布大小）：</p>
+            <div class="init-text" id="init-name">
+                <!-- 待用 JavaScript 填充 -->
+            </div>
+        </div>
+
+        <div class="controls" id="controls-block">
+            将鼠标悬停在按钮上会出现说明!
+            <button id="button-step" onclick="step();" title="计算并呈现游戏的下一步">单步运行</button>
+            <button id="button-start-pause" title="以循环周期为间隔循环计算并呈现游戏的下一步" status="start">开始 循环运行</button>
+            <button id="button-reset" onclick="step();" title="重新绘制画布为以上方画布大小为边长的正方形，并清空内容">重置画布</button>
+        </div>
+        <table class="automation-table" id="automation-table">
+            <!-- 此部分后续用 JavaScript 填充 -->
+        </table>
+    </div>
+
+    <div class="footer" id="footer-area">
+        <a class="footer-menu">作者：陈昱萌 2023K8009929028</a>
+        <a class="footer-menu" href="https://github.com/Chen-Yuanmeng/Conway_Game_of_Life/blob/master/LICENSE" target="_blank">GPL-3.0 License<svg width="12px" height="12px" viewBox="0 0 24 24" style="cursor:pointer"><g stroke-width="2.1" stroke="#666" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 13.5 17 19.5 5 19.5 5 7.5 11 7.5"></polyline><path d="M14,4.5 L20,4.5 L20,10.5 M20,4.5 L11,13.5"></path></g></svg></a>
+        <a class="footer-menu" href="https://github.com/Chen-Yuanmeng/Conway_Game_of_Life" target="_blank">Github<svg width="12px" height="12px" viewBox="0 0 24 24" style="cursor:pointer"><g stroke-width="2.1" stroke="#666" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 13.5 17 19.5 5 19.5 5 7.5 11 7.5"></polyline><path d="M14,4.5 L20,4.5 L20,10.5 M20,4.5 L11,13.5"></path></g></svg></a>
+        <a class="footer-menu" href="reference.html">References and acknowledgements</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
