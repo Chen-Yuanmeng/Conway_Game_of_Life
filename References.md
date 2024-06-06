@@ -3,7 +3,8 @@
 1. 单击格子改变格子颜色的onmousedown属性借鉴于示例作品 [Langton's Ant](https://teacher.solid.things.ac.cn:7243/public/web/Langton's_Ant.html)；
 2. 介绍文字和列出的各类初始状态来自 [康威生命游戏 - 维基百科, 自由的百科全书](https://zh.wikipedia.org/w/index.php?title=%E5%BA%B7%E5%A8%81%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F&oldid=80386560)；
 3. 页面下方用来指示外部网站链接的 svg 矢量图来自 [一个 User Experience StackExchange 问题的回答](https://ux.stackexchange.com/a/136689)；
-4. 感谢各位老师和同学在本人开发过程中的支持。
+4. 网页图标来自 [File:Conwaylifecom.png - LifeWiki](https://conwaylife.com/wiki/File:Conwaylifecom.png)；
+5. 感谢各位老师和同学在本人开发过程中的支持。
 
 ## AI辅助创作声明
 
