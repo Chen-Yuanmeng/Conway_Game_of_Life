@@ -239,7 +239,7 @@ function getCurrentCanvasStatus() {
 async function getInitStatusJSON() {
 	try {
 		// 发起请求获取 initStatus.json 内容
-		const response = await fetch('./initStatus.json');
+		const response = await fetch('../data/initStatus.json');
 		
 		// 检查请求是否成功
 		if (!response.ok) {
