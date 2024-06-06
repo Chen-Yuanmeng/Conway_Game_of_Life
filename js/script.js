@@ -235,33 +235,51 @@ function getCurrentCanvasStatus() {
 	return currentCanvasStatus;
 };
 
+// 用于某个网址的获取
+async function fetchWithFallback(urls) {
+    for (const url of urls) {
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                return await response.json();
+            } else {
+                console.warn(`Failed to fetch from ${url}, HTTP error code: ${response.status}`);
+            }
+        } catch (error) {
+            console.warn(`Failed to fetch from ${url}, Error:`, error);
+        }
+    }
+    throw new Error('All fallback URLs failed.');
+}
+
 // 读取存储的初始状态信息
 async function getInitStatusJSON() {
-	try {
-		// 发起请求获取 initStatus.json 内容
-		const response = await fetch('../data/initStatus.json');
-		
-		// 检查请求是否成功
-		if (!response.ok) {
-			throw new Error(`HTTP error, code ${response.status}`);
-		}
-		
-		// 将响应解析为 JSON 格式
-		const data = await response.json();
+	// 运用依托答辩解决GitHub Pages的奇怪根目录解析
+    const fallbackUrls = [
+        '/data/initStatus.json',
+        './data/initStatus.json',
+		'../data/initStatus.json'
+    ];
 
-		for (let i = 0; i < data.length; i++) {
-			document.getElementById('init-name').appendChild(parseStatus(data[i], i));
-		}
-	}
-	catch (error) {
-		const errMessage = document.createElement('p');
-		errMessage.setAttribute('class', 'init-items');
-		errMessage.textContent = "若看到这行提示，说明预设的初始内容示例没有加载成功，请刷新重试！";
-		errMessage.style.color = "red";
-		document.getElementById('init-name').appendChild(errMessage);
-		console.error('Error when loading JSON', error);
-	}
-};
+    try {
+        // 尝试从多个路径获取数据，直到成功为止
+        const data = await fetchWithFallback(fallbackUrls);
+
+        // 遍历过去获取的数据，添加到DOM中
+        for (let i = 0; i < data.length; i++) {
+            document.getElementById('init-name').appendChild(parseStatus(data[i], i));
+        }
+    } catch (error) {
+        const errMessage = document.createElement('p');
+        errMessage.setAttribute('class', 'init-items');
+        errMessage.textContent = "若看到这行提示，说明预设的初始内容示例没有加载成功，请刷新重试！";
+        errMessage.style.color = "red";
+        document.getElementById('init-name').appendChild(errMessage);
+        console.error('Error when loading JSON', error);
+    }
+}
+
+
 // 解析单个status
 function parseStatus(status, id) {
 	let size = status["canvasSize"];
