@@ -213,7 +213,6 @@ document.getElementById("button-reset").addEventListener("click", () => {
 	};
 	
 	createTable();
-	
 });
 
 // 用于调试输出
@@ -297,6 +296,13 @@ function parseStatus(status, id) {
 
 // 将某个 initStatus 加到棋盘上
 function onClickInitialStatus(statusJSONString) {
+	buttonStartPause = document.getElementById('button-start-pause');
+	buttonStartPause.setAttribute("status", "start");
+	buttonStartPause.setAttribute("title", "以循环周期为间隔循环计算并呈现游戏的下一步");
+	buttonStartPause.textContent = "开始 循环运行";
+	timerController.pause();
+	log("Cycle reset");
+	
 	let [size, info] = JSON.parse(statusJSONString);
 	document.getElementById('input-canvasSize').value = size;
 	config["canvasSize"] = size;
